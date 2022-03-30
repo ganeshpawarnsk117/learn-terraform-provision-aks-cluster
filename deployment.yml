@@ -1,0 +1,29 @@
+#apiVersion: extensions/v1beta1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: node
+    app.kubernetes.io/instance: mean-demo-instance
+    app.kubernetes.io/version: '1.0.0'
+    app.kubernetes.io/managed-by: kubectl
+  name: node-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+      - image: anshulganvir/app:V1
+        imagePullPolicy: Always
+        name: node
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always
+
+
